@@ -3,13 +3,13 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 // Setup empty JS object to act as endpoint for all routes
-projectData = [];
+let projectData = {};
 
 // port
-const port = 3000
+const port = 3000;
 
 // listening
-const listening = () => console.log(`Started on localhost:${port}`)
+const listening = () => console.log(`Started on localhost:${port}`);
 
 // Start up an instance of app
 const app = express();
@@ -28,11 +28,12 @@ app.get('/get', (req, res) => res.send(projectData));
 
 const add = (req, res) => {
   const newObject = {
-    zip: req.body.zip,
-    feeling: req.body.feeling,
+    temperature: req.body.temperature,
+    date: req.body.date,
+    userResponse: req.body.userResponse,
   };
 
-  projectData.push(newObject);
+  projectData = newObject;
   res.send(projectData);
 }
 
