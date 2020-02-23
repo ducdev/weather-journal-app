@@ -37,10 +37,18 @@ const postData = async (url = '', data = {}) => {
 
 // update UI
 
-const updateUI = ({ date, feeling, temp }) => {
-  document.getElementById('date').innerText = `Date: ${date}`;
-  document.getElementById('temp').innerText = `Temperature: ${temp} °F`;
-  document.getElementById('content').innerText = `I feel: ${feeling}`;
+const updateUI = async () => {
+  const request = await fetch('/get');
+
+  try {
+    const { date, temp, feeling } = await request.json()
+    document.getElementById('date').innerText = `Date: ${date}`;
+    document.getElementById('temp').innerText = `Temperature: ${temp} °F`;
+    document.getElementById('content').innerText = `I feel: ${feeling}`;
+  }
+  catch (error) {
+    console.error(error);
+  }
 }
 
 
@@ -66,7 +74,7 @@ const onClickHandler = async () => {
       time,
     });
     if (postResult && postResult.temp) {
-      updateUI(postResult)
+      updateUI();
     }
   }
 }
