@@ -27,13 +27,7 @@ app.use(cors());
 app.get('/get', (req, res) => res.send(projectData));
 
 const add = (req, res) => {
-  const newObject = {
-    temperature: req.body.temperature,
-    date: req.body.date,
-    userResponse: req.body.userResponse,
-  };
-
-  projectData = newObject;
+  projectData = req.body;
   res.send(projectData);
 }
 
